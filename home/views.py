@@ -1,6 +1,10 @@
 from django.shortcuts import render
+import logging
+
+logger = logging.getLogger(__name__)
 
 def home(request):
+    logger.info("Homepage loaded by user")
     context = {
         'title': 'SecureVision Pro | Camera & Starlink Installations',
         'slides': [
