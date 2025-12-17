@@ -296,14 +296,23 @@
         </div>
 
         <!-- Navigation -->
-        <nav class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#solutions">Solutions</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-            <a href="{% url 'starlink' %}">Starlink</a>
-        </nav>
+        <div class="nav-right">
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#solutions">Solutions</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="{% url 'starlink' %}">Starlink</a>
+            </nav>
+        </div>
+
+        <!-- Mobile Nav Toggle -->
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
 
         <!-- Search -->
         <div class="search-box">
