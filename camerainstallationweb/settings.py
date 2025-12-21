@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-hl!f4)ir@a8iq!4zwxr8r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['securty-systems.onrender.com', 'localhost', '127.0.0.1', '192.168.1.20', 'topsystems.co.zw', 'testserver']
+ALLOWED_HOSTS = ['security-systems.onrender.com', 'localhost', '127.0.0.1', '192.168.1.20', 'topsystems.co.zw', 'testserver']
 
 # Application definition
 
@@ -167,16 +167,16 @@ LOGGING = {
 }
 
 # Development email settings: use console backend when DEBUG=True
-if os.environ.get('EMAIL_HOST'):
-    # If environment SMTP vars are present, configure SMTP backend
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = os.environ.get('EMAIL_HOST')
-    EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
-    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True') == 'True'
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
-elif DEBUG:
+if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'no-reply@topsystems.local')
+    DEFAULT_FROM_EMAIL = 'no-reply@topsystems.local'
+else:
+    # Production email settings
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'munqitshwatashinga1@gmail.com')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'qwrugcdidjupquhf')
+    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', 'munqitshwatashinga1@gmail.com')
 

@@ -6,7 +6,7 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from .forms import ContactForm
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from .models import ContactMessage, QuoteMessage
 
 logger = logging.getLogger(__name__)
@@ -82,10 +82,17 @@ def contact(request):
             body = f"From: {email}\n\n{message_text}"
 
             recipient = getattr(settings, 'CONTACT_RECIPIENT_EMAIL', 'munqitshwatashinga1@gmail.com')
-            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None) or email
+            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'munqitshwatashinga1@gmail.com')
 
             try:
-                send_mail(subject, body, from_email, [recipient], fail_silently=False)
+                email_msg = EmailMessage(
+                    subject=subject,
+                    body=body,
+                    from_email=from_email,
+                    to=[recipient],
+                    reply_to=[email]
+                )
+                email_msg.send(fail_silently=False)
                 # Save to database
                 ContactMessage.objects.create(email=email, message=message_text)
                 messages.success(request, 'Message sent successfully!')
@@ -174,11 +181,18 @@ def request_quote(request):
     recipient = 'munqitshwatashinga1@gmail.com'
 
     # Determine from email
-    from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None) or email
+    from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'munqitshwatashinga1@gmail.com')
 
     email_sent = False
     try:
-        send_mail(subject, body, from_email, [recipient], fail_silently=False)
+        email_msg = EmailMessage(
+            subject=subject,
+            body=body,
+            from_email=from_email,
+            to=[recipient],
+            reply_to=[email]
+        )
+        email_msg.send(fail_silently=False)
         # Save to database
         QuoteMessage.objects.create(
             full_name=name,
