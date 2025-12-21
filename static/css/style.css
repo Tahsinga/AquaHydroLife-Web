@@ -66,6 +66,16 @@ body {
     .nav-bar {
         padding: 0 20px;
     }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.1rem; }
+    p { font-size: 0.85rem; }
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1rem; }
+    .service-card h3 { font-size: 1rem; }
+    .service-card p { font-size: 0.8rem; }
+    .project-card h4 { font-size: 0.9rem; }
+    .project-card p { font-size: 0.8rem; }
     .mobile-container img,
     .mobile-hero img {
         width: 100%;
