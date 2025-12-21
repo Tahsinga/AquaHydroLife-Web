@@ -57,9 +57,31 @@ body {
     }
 }
 
-/* Make desktop view the same for mobile */
-.mobile-container {
+/* Make desktop view the same for mobile: hide mobile-specific sections
+   and force desktop sections to display so desktop images are used
+   on all screen sizes. Also ensure desktop images are responsive. */
+.mobile-container,
+.mobile-hero,
+.mobile-top-bar,
+.mobile-nav-bar {
     display: none !important;
+}
+
+.desktop-container,
+.desktop-hero,
+.desktop-top-bar,
+.desktop-nav-bar {
+    display: block !important;
+}
+
+/* Ensure desktop images scale properly on small screens */
+.desktop-container img,
+.desktop-hero .hero-slideshow img,
+.desktop-hero img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
 }
 
 /* Info Bar */

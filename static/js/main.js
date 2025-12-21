@@ -192,3 +192,43 @@ window.addEventListener('pageshow', function (event) {
     // run on both persisted (bfcache) and normal show events
     restartEntranceAnimations();
 });
+
+// --- Performance helpers: lazy-load images and sync desktop images to mobile ---
+function syncDesktopToMobileImages() {
+    try {
+        const desktopImgs = Array.from(document.querySelectorAll('.desktop-container img, .desktop-hero img, .desktop-top-bar img, .desktop-nav-bar img'));
+        const mobileImgs = Array.from(document.querySelectorAll('.mobile-container img, .mobile-hero img, .mobile-top-bar img, .mobile-nav-bar img'));
+
+        // Copy desktop srcs to mobile images by index (fallback to first desktop image)
+        if (desktopImgs.length && mobileImgs.length) {
+            mobileImgs.forEach((mImg, i) => {
+                const dImg = desktopImgs[i] || desktopImgs[0];
+                if (dImg && dImg.src) {
+                    mImg.src = dImg.src;
+                }
+            });
+        }
+
+        // Add lazy loading to non-critical images. Keep hero first image eager.
+        const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+        heroSlides.forEach((img, idx) => {
+            img.loading = idx === 0 ? 'eager' : 'lazy';
+        });
+
+        document.querySelectorAll('img').forEach(img => {
+            if (!img.hasAttribute('loading')) img.loading = 'lazy';
+        });
+    } catch (err) {
+        // fail silently
+        // console.warn('Image sync error', err);
+    }
+}
+
+// Run on DOM ready and on bfcache restore
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncDesktopToMobileImages);
+} else {
+    syncDesktopToMobileImages();
+}
+window.addEventListener('pageshow', syncDesktopToMobileImages);
+
