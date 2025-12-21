@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import logging
 import os
+import datetime
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render
 from django.contrib import messages
@@ -79,7 +80,21 @@ def contact(request):
             message_text = form.cleaned_data['message']
 
             subject = 'New Contact Message'
-            body = f"From: {email}\n\n{message_text}"
+            timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            body = (
+                f"NEW CONTACT MESSAGE RECEIVED\n"
+                f"=============================\n\n"
+                f"CUSTOMER DETAILS:\n"
+                f"----------------\n"
+                f"Email Address: {email}\n\n"
+                f"MESSAGE:\n"
+                f"--------\n"
+                f"{message_text}\n\n"
+                f"---\n"
+                f"This message was submitted via the TOPS SYSTEMS website contact form.\n"
+                f"Please respond to the customer's email: {email}\n"
+                f"Timestamp: {timestamp}"
+            )
 
             recipient = getattr(settings, 'CONTACT_RECIPIENT_EMAIL', 'munqitshwatashinga1@gmail.com')
             from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'munqitshwatashinga1@gmail.com')
@@ -164,17 +179,38 @@ def request_quote(request):
     name = request.POST.get('full_name', 'No name')
     email = request.POST.get('email', 'no-reply@example.com')
     phone = request.POST.get('phone', 'N/A')
-    service = request.POST.get('service', 'General Enquiry')
+    service_value = request.POST.get('service', 'General Enquiry')
     message = request.POST.get('message', '')
 
+    # Map service values to user-friendly names
+    service_mapping = {
+        'camera': 'Camera Installation',
+        'starlink': 'Starlink Setup',
+        'security': 'Security System',
+        'network': 'Network Integration',
+        'CCTV': 'CCTV System',
+        '': 'General Enquiry'
+    }
+    service = service_mapping.get(service_value, service_value)
+
     subject = f"Quote Request: {service} from {name}"
+    timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     body = (
-        f"You have received a new quote request:\n\n"
-        f"Name: {name}\n"
-        f"Email: {email}\n"
-        f"Phone: {phone}\n"
-        f"Service: {service}\n\n"
-        f"Message:\n{message}\n"
+        f"NEW QUOTE REQUEST RECEIVED\n"
+        f"==========================\n\n"
+        f"CUSTOMER DETAILS:\n"
+        f"----------------\n"
+        f"Full Name: {name}\n"
+        f"Email Address: {email}\n"
+        f"Phone Number: {phone}\n"
+        f"Requested Service: {service}\n\n"
+        f"PROJECT DESCRIPTION:\n"
+        f"-------------------\n"
+        f"{message}\n\n"
+        f"---\n"
+        f"This quote request was submitted via the TOPS SYSTEMS website.\n"
+        f"Please respond to the customer's email: {email}\n"
+        f"Timestamp: {timestamp}"
     )
 
     # Recipient for testing (corrected)
