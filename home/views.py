@@ -77,6 +77,7 @@ def about(request):
 logger = logging.getLogger(__name__)
 
 def request_quote(request):
+    email_sent = False
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -130,17 +131,18 @@ def request_quote(request):
 
                 messages.success(request, 'Your request has been sent successfully!')
                 logger.info('Quote request sent by %s', email)
+                email_sent = True
 
             except Exception as exc:
                 print('❌ Failed to send email:', str(exc))  # Terminal feedback
                 logger.exception('Failed to send quote email: %s', exc)
                 messages.error(request, 'Failed to send your request. Please try again later.')
+                email_sent = False
 
-            return redirect('request_quote')
     else:
         form = ContactForm()
 
-    return render(request, 'home/contact.html', {'title': 'Request a Quote', 'form': form})
+    return render(request, 'home/contact.html', {'title': 'Request a Quote', 'form': form, 'show_form': not email_sent})
 
 def starlink(request):
     return render(request, 'home/starlink.html', {'title': 'Starlink Services'})
