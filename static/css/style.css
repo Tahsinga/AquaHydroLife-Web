@@ -1384,7 +1384,8 @@ body {
 }
 
 .hero-banner.mobile-hero {
-    animation: backgroundSlidesMobile 18s infinite;
+    animation: none;
+    background-image: url('../images/Hero-BannerImages/imageTopBar6.webp');
 }
 
 @keyframes backgroundSlidesMobile {
