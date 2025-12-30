@@ -31,6 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-hl!f4)ir@a8iq!4zwxr8r
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = [
+    'aquahydrolife.onrender.com',
     'security-systems.onrender.com',
     '192.168.1.103',
     'securty-systems.onrender.com',
