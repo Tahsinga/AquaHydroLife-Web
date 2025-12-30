@@ -30,7 +30,18 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-hl!f4)ir@a8iq!4zwxr8r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = [
+    'security-systems.onrender.com',
+    'aquahydrolife.onrender.com',
+    '192.168.1.103',
+    'securty-systems.onrender.com',
+    'localhost',
+    '127.0.0.1',
+    '192.168.1.20',
+    'topsystems.co.zw',
+    'www.topsystems.co.zw',
+    'testserver',
+]
 
 # Application definition
 
