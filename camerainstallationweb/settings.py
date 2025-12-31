@@ -30,7 +30,15 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-hl!f4)ir@a8iq!4zwxr8r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['aquahydrolife.onrender.com', '127.0.0.1', 'localhost']
+# Read ALLOWED_HOSTS from environment (comma-separated) so Render or other hosts can override it.
+env_allowed_hosts = os.environ.get('ALLOWED_HOSTS')
+if env_allowed_hosts:
+    ALLOWED_HOSTS = [h.strip() for h in env_allowed_hosts.split(',') if h.strip()]
+else:
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'aquahydrolife.onrender.com']
+
+# Emit a startup message to help debugging deployed host mismatches
+print(f'Effective ALLOWED_HOSTS: {ALLOWED_HOSTS}')
 
 # Application definition
 
