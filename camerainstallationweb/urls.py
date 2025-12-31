@@ -33,7 +33,7 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
     # Favicon and icons
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
-    path('apple-touch-icon.png', RedirectView.as_view(url='/static/images/logo.png', permanent=True)),
+    path('apple-touch-icon.png', RedirectView.as_view(url='/static/favicon.ico', permanent=True)),
     path('manifest.json', RedirectView.as_view(url='/static/manifest.json', permanent=True)),
 ]
 
