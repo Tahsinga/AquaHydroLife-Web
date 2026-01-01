@@ -97,7 +97,8 @@
         }
 
         @media (max-width: 768px) {
-            .hero { height: 65vh; min-height: 420px; }
+            /* Slightly reduce hero height on tablets/smaller screens */
+            .hero { height: 60vh; min-height: 360px; }
         }
 
         .hero::before {
@@ -179,6 +180,19 @@
             .hero-title { font-size: 2.2rem; }
             .hero-subtitle { font-size: 1rem; padding: 0 1rem; }
             .hero-btn { padding: 0.9rem 1.6rem; font-size: 1rem; }
+            /* Make hero text more natural and readable on tablet/mobile */
+            .hero-title {
+                color: #f8fafc; /* slightly off-white */
+                font-weight: 700; /* a bit lighter than desktop */
+                text-transform: none; /* normal case looks friendlier on small screens */
+                text-shadow: 0 4px 10px rgba(0,0,0,0.45);
+                line-height: 1.08;
+            }
+            .hero-subtitle {
+                color: rgba(248,250,252,0.95);
+                line-height: 1.35;
+                font-weight: 500;
+            }
         }
 
         .hero-content {
@@ -189,7 +203,11 @@
             max-width: 900px;
             padding: 2rem 2.5rem;
             animation: heroFadeIn 1.6s ease-out;
-            display: inline-block;
+            display: flex; /* center everything inside the box */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
             background: rgba(0,0,0,0.26); /* subtle translucent panel to ensure legibility */
             border-radius: 14px;
             backdrop-filter: blur(6px);
@@ -408,7 +426,7 @@
 
         /* Services Section */
         .services {
-            padding: 5rem 0;
+            padding: 3rem 0; /* reduced to move section content upward */
             background: #f8fafc;
         }
 
@@ -420,37 +438,43 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.6rem; /* tighten spacing */
             color: #1e40af;
         }
 
         .section-subtitle {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 0.95rem; /* smaller and more subtle */
             color: #6b7280;
-            margin-bottom: 3rem;
+            margin-bottom: 1.2rem; /* tighten gap under subtitle */
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            font-weight: 400; /* normal weight */
+            line-height: 1.45;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.2rem; /* tighter grid gap to pull items upward */
         }
 
         .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            background: linear-gradient(180deg, #ffffff, #fbfdff);
+            padding: 1.6rem; /* a bit more padding for breathing room */
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(2,6,23,0.06);
+            transition: transform 0.28s, box-shadow 0.28s, border-color 0.28s;
+            border: 1px solid rgba(2,6,23,0.04);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .service-card::before {
@@ -466,8 +490,9 @@
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 22px 44px rgba(2,6,23,0.12);
+            border-color: rgba(30,64,175,0.08);
         }
 
         .service-card:hover::before {
@@ -478,25 +503,30 @@
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, #1e40af, #06b6d4);
-            border-radius: 15px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.45rem;
+            margin-bottom: 1rem; /* spacing above title */
+            flex-shrink: 0;
         }
 
         .service-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #1e40af;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem; /* tighten spacing to pull text up */
+            color: #123a8a;
+            letter-spacing: 0.2px;
         }
 
         .service-description {
-            color: #6b7280;
-            line-height: 1.6;
+            color: #55606a;
+            line-height: 1.55;
+            margin-top: 0; /* ensure no extra top gap */
+            font-size: 0.95rem;
+            max-width: 42ch; /* limit line length for readability */
         }
 
         /* Showcase Section */
@@ -633,7 +663,7 @@
 
         .about-text h3 {
             font-size: 2rem;
-            font-weight: 600;
+            font-weight: 800; /* increased weight for stronger emphasis */
             margin-bottom: 1.5rem;
             color: #1e40af;
         }
@@ -867,17 +897,51 @@
             font-size: 0.9rem;
         }
 
-        /* Mobile: stack icon above text for very narrow screens */
+        /* Mobile: modern stacked contact cards */
         @media (max-width: 480px) {
             .contact-item {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto;
-                justify-items: center;
-                text-align: center;
-                gap: 0.35rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                background: linear-gradient(180deg, #ffffff, #f8fbff);
+                padding: 0.75rem 0.9rem;
+                border-radius: 12px;
+                width: 92%;
+                max-width: 420px;
+                margin: 0.45rem auto;
+                box-shadow: 0 8px 20px rgba(2,6,23,0.06);
             }
 
-            .contact-item i { margin-bottom: 0.12rem; }
+            .contact-item i {
+                width: 56px;
+                height: 56px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #06b6d4, #1e40af);
+                border-radius: 12px;
+                font-size: 1.15rem;
+                color: #fff;
+                box-shadow: 0 6px 18px rgba(6,182,212,0.14);
+                margin-bottom: 0.15rem;
+                flex-shrink: 0;
+            }
+
+            .contact-item div {
+                text-align: center;
+                line-height: 1.25;
+                font-size: 0.95rem;
+                color: #0f172a;
+            }
+
+            .contact-item strong {
+                display: block;
+                font-weight: 700;
+                color: #1e40af;
+                margin-bottom: 0.12rem;
+            }
         }
 
         /* Form styles - smaller, compact */
@@ -967,6 +1031,92 @@
             }
             .contact-form { justify-self: stretch; margin-top: 1rem; max-width: 100%; }
             .btn { width: 100%; display: block; margin: 0.6rem 0 0; }
+
+            /* Remove contact items under the map on mobile (hide them completely) */
+            .map-wrapper .contact-info { display: none !important; }
+        }
+
+        /* Desktop: show contact details as horizontal cards and place form below them */
+        @media (min-width: 921px) {
+            /* Make contact-info a horizontal row of items */
+            .contact-content {
+                grid-template-columns: 1fr; /* stack info and form vertically */
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            /* Float contact details over the map on desktop (left-bottom) */
+            .contact-info {
+                display: flex;
+                gap: 1rem;
+                justify-content: flex-start;
+                align-items: center;
+                width: auto;
+                flex-wrap: nowrap;
+                position: absolute;
+                left: 2rem;
+                bottom: 1.6rem;
+                z-index: 40;
+                background: rgba(255,255,255,0.96);
+                padding: 0.6rem 0.8rem;
+                border-radius: 12px;
+                box-shadow: 0 12px 34px rgba(2,6,23,0.12);
+                align-items: stretch;
+            }
+
+            /* Cleaner, compact desktop look for contact items when floating */
+            .map-wrapper .contact-item {
+                display: flex;
+                align-items: center;
+                width: auto;
+                padding: 0.4rem 0.6rem;
+                background: transparent;
+                border-radius: 8px;
+                box-shadow: none;
+                border: none;
+                text-align: left;
+                color: #0f172a;
+                transition: background 0.12s, transform 0.12s;
+                margin: 0 0.25rem 0 0;
+            }
+
+            .map-wrapper .contact-item:hover { background: rgba(6,182,212,0.03); transform: translateY(-2px); }
+
+            .map-wrapper .contact-item i {
+                width: 40px;
+                height: 40px;
+                font-size: 0.95rem;
+                border-radius: 50%;
+                margin-right: 0.6rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #06b6d4, #1e40af);
+                color: #fff;
+                box-shadow: 0 6px 18px rgba(6,182,212,0.08);
+                flex-shrink: 0;
+            }
+
+            .map-wrapper .contact-item div { display:block; font-size: 0.95rem; text-align:left; line-height:1.15; }
+            .map-wrapper .contact-item strong { display:block; font-weight:700; color:#1e40af; margin-bottom:0.12rem; }
+
+            /* Make sure long addresses wrap nicely */
+            .map-wrapper .contact-item .address { white-space: normal; }
+
+            /* Ensure the existing map-card remains above the floating items on the right */
+            .map-card { z-index: 50; }
+
+            /* Position form below contact-info (kept in document flow) */
+            .contact-form {
+                margin-top: 0.8rem;
+                max-width: 720px;
+                width: 100%;
+                background: #ffffff;
+                padding: 1rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 24px rgba(2,6,23,0.04);
+                justify-self: center;
+            }
         }
 
         /* Footer */
@@ -1118,6 +1268,8 @@
                 padding: 0.4rem 0.8rem;
             }
 
+            /* make header flow with page on small screens (not fixed) */
+            .header { position: static; }
             /* remove hamburger dropdown on small screens */
             .nav-toggle { display: none; }
 
@@ -1147,8 +1299,7 @@
             }
 
             .nav-links a.contact-btn {
-                padding: 0.32rem 0.6rem;
-                max-width: none;
+                display: none; /* hide Get Quote button on small screens */
             }
 
             .showcase-slide {
@@ -1176,23 +1327,31 @@
 
         /* Extra small screens: compact hero-content */
         @media (max-width: 480px) {
+            /* Reduce hero height on very small screens to keep images compact */
+            .hero { height: 45vh; min-height: 240px; }
             .hero-content {
-                padding: 0.32rem 0.56rem; /* tighter padding */
-                max-width: 80%; /* narrower box */
+                padding: 0.9rem 1rem; /* slightly larger padding for readability */
+                max-width: 92%; /* slightly wider box on very small screens */
                 border-radius: 8px;
                 box-shadow: 0 6px 14px rgba(0,0,0,0.14);
+                min-height: 220px; /* make the box longer/taller on mobile */
             }
             .hero-title {
-                font-size: 1.05rem; /* reduced title size */
+                font-size: 1.05rem; /* keep reduced title size */
                 line-height: 1.02;
                 letter-spacing: 0.2px;
-                margin-bottom: 0.22rem;
+                margin-bottom: 0.32rem;
                 font-weight: 700;
+                /* softer, easier-to-read white on very small screens */
+                color: #f8fafc;
+                text-shadow: 0 3px 8px rgba(0,0,0,0.42);
+                text-transform: none;
             }
             .hero-subtitle {
-                font-size: 0.78rem; /* smaller subtitle */
-                margin-bottom: 0.4rem;
-                line-height: 1.2;
+                font-size: 0.9rem; /* slightly larger subtitle for readability */
+                margin-bottom: 0.6rem;
+                line-height: 1.25;
+                max-width: none; /* allow subtitle to wrap freely */
             }
             .hero-btn {
                 padding: 0.34rem 0.68rem; /* smaller button */
@@ -1200,43 +1359,182 @@
                 border-radius: 999px;
             }
 
-            /* Compact service cards for very small screens */
+            /* Mobile stacking for service cards: icon above title above description */
             .services-grid {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 2rem; /* slightly reduced spacing */
             }
 
             .service-card {
-                padding: 0.9rem;
-                border-radius: 14px;
-                min-height: 110px;
-                max-height: 165px;
-                overflow: hidden;
-                display: flex;
+                padding: 2.2rem; /* reduced padding for a less bulky look */
+                border-radius: 18px;
+                min-height: 220px; /* slightly smaller height */
+                max-height: none;
+                overflow: visible;
+                display: flex; /* stack vertically */
                 flex-direction: column;
-                justify-content: flex-start;
-                gap: 0.45rem;
+                align-items: center;
+                text-align: center;
+                gap: 0.65rem 0;
+                background: linear-gradient(180deg, #ffffff, #fbfeff);
+                box-shadow: 0 12px 30px rgba(2,6,23,0.08);
+                border: 1px solid rgba(2,6,23,0.06);
             }
 
             .service-icon {
-                width: 44px;
-                height: 44px;
-                font-size: 1.05rem;
-                border-radius: 12px;
-                margin-bottom: 0.4rem;
+                width: 72px;
+                height: 72px;
+                font-size: 1.4rem;
+                border-radius: 16px;
+                margin: 0; /* remove default margins */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, #1e40af, #06b6d4);
             }
 
             .service-title {
-                font-size: 1rem;
-                margin-bottom: 0.2rem;
+                font-size: 1.4rem;
+                margin: 0; /* keep title tight under icon */
+                font-weight: 900; /* bolder on mobile */
+                color: #123a8a; /* match desktop color */
+                letter-spacing: 0.25px;
+                line-height: 1.08;
             }
 
             .service-description {
-                font-size: 0.82rem;
-                line-height: 1.15;
-                color: #55606a;
-                max-height: 3.2em; /* limit lines shown */
-                overflow: hidden;
+                font-size: 1.05rem; /* slightly reduced body text */
+                line-height: 1.45;
+                color: #515b63;
+                margin-top: 0.4rem;
+                max-width: 46ch; /* limit line length for comfort */
+                font-weight: 400;
+            }
+
+            /* Make showcase full-bleed and fit nicely on phones */
+            .showcase {
+                padding: 0.6rem 0; /* further reduce vertical spacing so section moves up */
+            }
+
+            .showcase .container {
+                max-width: none;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .showcase-carousel {
+                max-width: none;
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
+                border-radius: 0;
+            }
+
+            .showcase-slide {
+                height: min(56vh, 92vw); /* cap height so images aren't too tall */
+            }
+
+            .showcase-slide img {
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .showcase-overlay {
+                padding: 1rem 1rem 1.2rem;
+            }
+
+            /* Move About section content up on very small screens */
+            .about {
+                padding-top: 1rem; /* reduce top spacing more */
+                padding-bottom: 1.6rem;
+            }
+
+            .about-content {
+                gap: 0.6rem; /* tighter stacking on mobile */
+            }
+
+            /* Pull testimonials closer */
+            .testimonials {
+                padding-top: 1.2rem;
+                padding-bottom: 1.6rem;
+            }
+
+            .about-text h3 {
+                margin-top: 0; /* pull title up */
+                margin-bottom: 0.6rem;
+                font-size: 1.4rem; /* slightly smaller but still prominent */
+                font-weight: 800; /* bolder on very small screens */
+            }
+
+            .about-text p {
+                margin-bottom: 0.9rem; /* reduce gap under paragraphs */
+            }
+
+            /* Make the About image full-bleed on very small screens */
+            .about-image {
+                width: 100vw;
+                margin-left: calc(50% - 50vw);
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .about-image img {
+                width: 100vw;
+                max-width: 100vw;
+                margin-left: calc(50% - 50vw);
+                border-radius: 0; /* edge-to-edge look */
+                object-fit: cover;
+                max-height: 220px; /* keep image compact on very small screens */
+                height: auto;
+            }
+
+            /* Mobile: testimonials — make cards full-width and allow text to wrap */
+            .testimonials-grid {
+                grid-template-columns: 1fr; /* single column */
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .testimonial-card {
+                padding: 1rem; /* tighter padding for mobile */
+                border-radius: 12px;
+                margin: 0 auto;
+                max-width: 92vw; /* ensure card stays within viewport */
+                box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+            }
+
+            .testimonial-card::before {
+                font-size: 2.6rem; /* slightly smaller quote mark */
+                top: 0.6rem;
+                left: 0.6rem;
+            }
+
+            .testimonial-content p {
+                white-space: normal; /* allow wrapping */
+                overflow: visible;
+                text-overflow: unset;
+                padding-left: 0.6rem; /* small left padding for readability */
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin-bottom: 0.6rem;
+            }
+
+            .author-info h4 { font-size: 0.95rem; }
+            .author-info span { font-size: 0.85rem; color: #6b7280; }
+
+            /* Reduce stat numbers and labels on extra-small screens */
+            .stats {
+                margin-top: 1rem; /* slightly reduce gap */
+                gap: 1rem;
+            }
+            .stat-number {
+                font-size: 1.6rem; /* smaller numbers on phones */
+                font-weight: 700;
+            }
+            .stat-label {
+                font-size: 0.85rem;
+                font-weight: 500;
+                color: #6b7280;
             }
         }
     </style>
@@ -1253,6 +1551,7 @@
                 <a href="#about">About</a>
                 <a href="#testimonials">Testimonials</a>
                 <a href="#contact">Contact</a>
+                <a href="#contact" class="contact-btn">Get Quote</a>
             </nav>
         </div>
     </header>
@@ -1500,37 +1799,33 @@
                     <p><a href="https://maps.app.goo.gl/zKLQwaVZ27xEbnrZ6" target="_blank" rel="noopener">Open in Google Maps</a></p>
                     <p style="margin-top:.5rem;"><a href="mailto:aqualifeinv@gmail.com">aqualifeinv@gmail.com</a></p>
                 </div>
-            </div>
-
-            <div class="contact-card">
-            <div class="contact-content">
                 <div class="contact-info">
                     <!-- <h3>Get In Touch</h3> -->
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <div>
                             <strong>Tel</strong><br>
-                            039 226 0754
+                            <a href="tel:+263392260754">039 226 0754</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-mobile-alt"></i>
                         <div>
                             <strong>Cell</strong><br>
-                            0773 871 082<br>
-                            0779 321 373
+                            <a href="tel:+263773871082">0773 871 082</a><br>
+                            <a href="tel:+263779321373">0779 321 373</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <strong>Email</strong><br>
-                            aqualifeinv@gmail.com
+                            <a href="mailto:aqualifeinv@gmail.com">aqualifeinv@gmail.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <div>
+                        <div class="address">
                             <strong>Address</strong><br>
                             Shop No. 428 H. Chitepo St<br>Scripture Union Building<br>Masvingo
                         </div>
@@ -1543,6 +1838,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="contact-card">
+            <div class="contact-content">
                 <form class="contact-form" method="post">
                     {% csrf_token %}
                     <div class="form-group">
@@ -1704,7 +2003,9 @@
 
             function updateBodyPadding() {
                 // Only apply padding on small screens where header is fixed
-                if (window.innerWidth <= 768 && navLinks.classList.contains('open')) {
+                const headerComputedPos = window.getComputedStyle(headerEl).position;
+                const headerIsFixed = headerComputedPos === 'fixed';
+                if (window.innerWidth <= 768 && navLinks.classList.contains('open') && headerIsFixed) {
                     document.body.style.paddingTop = headerEl.offsetHeight + 'px';
                 } else {
                     document.body.style.paddingTop = null;
@@ -1889,10 +2190,24 @@
                     const mapEl = document.getElementById('map');
                     if (!mapEl) return;
                     const map = L.map('map', { scrollWheelZoom: false }).setView([lat, lng], 15);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+
+                    // Light (OSM) and Satellite (Esri World Imagery) base layers
+                    const osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         maxZoom: 19,
                         attribution: '&copy; OpenStreetMap contributors'
-                    }).addTo(map);
+                    });
+
+                    const esriSat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                        maxZoom: 23,
+                        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics'
+                    });
+
+                    // Add satellite by default
+                    esriSat.addTo(map);
+
+                    // Layer control (collapsed on mobile)
+                    L.control.layers({ 'Satellite': esriSat, 'Light Map': osm }, null, { collapsed: true }).addTo(map);
+
                     const marker = L.marker([lat, lng]).addTo(map);
                     marker.bindPopup('<strong>Aqua HydroLife</strong><br>Shop No. 428 H. Chitepo St<br>Masvingo<br><a href="https://maps.app.goo.gl/zKLQwaVZ27xEbnrZ6" target="_blank" rel="noopener">Open in Google Maps</a>').openPopup();
                 } catch (e) {
@@ -1941,6 +2256,16 @@
                 transform: translateY(-100px) rotate(360deg);
                 opacity: 0;
             }
+        }
+        /* Make services text bolder on mobile for readability */
+        @media (max-width: 768px) {
+            .service-title { font-weight: 700; font-size: 1.45rem; }
+            .service-description { font-weight: 600; color: #4b5860; }
+        }
+
+        @media (max-width: 480px) {
+            .service-title { font-weight: 700; font-size: 1.2rem; }
+            .service-description { font-weight: 600; font-size: 0.95rem; }
         }
     </style>
 </body>
