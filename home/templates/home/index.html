@@ -1110,57 +1110,45 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            /* Mobile: show full nav and stack links vertically with toggle */
+            /* Mobile: show logo above and nav links as a single compact row */
             .nav-container {
                 flex-direction: column;
                 align-items: center;
-                gap: 0.5rem;
-                padding: 0.6rem 1rem;
+                gap: 0.25rem;
+                padding: 0.4rem 0.8rem;
             }
 
-            .nav-toggle {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                background: transparent;
-                border: none;
-                color: #1e40af;
-                font-size: 1.25rem;
-                cursor: pointer;
-                padding: 0.35rem 0.5rem;
-                border-radius: 8px;
-            }
+            /* remove hamburger dropdown on small screens */
+            .nav-toggle { display: none; }
 
             .nav-links {
                 display: flex;
-                flex-direction: column;
-                gap: 0.5rem;
+                flex-direction: row;
+                gap: 0.4rem;
                 align-items: center;
+                justify-content: center;
                 width: 100%;
-                max-height: 0;
+                max-height: none;
                 overflow: hidden;
-                transition: max-height 0.35s ease-in-out;
+                white-space: nowrap;
             }
 
-            .nav-links.open {
-                max-height: 480px; /* enough to reveal items */
-            }
-
+            /* reduce size/padding so items fit on one line */
             .nav-links a {
-                display: block;
-                padding: 0.5rem 0.8rem;
-                border-radius: 10px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.28rem 0.5rem;
+                border-radius: 8px;
                 width: auto;
-                font-size: 0.95rem;
+                font-size: 0.8rem;
                 text-align: center;
                 background: transparent;
             }
 
             .nav-links a.contact-btn {
-                width: 100%;
-                max-width: 320px;
-                box-sizing: box-border;
-                padding: 0.6rem 1rem;
+                padding: 0.32rem 0.6rem;
+                max-width: none;
             }
 
             .showcase-slide {
@@ -1265,7 +1253,6 @@
                 <a href="#about">About</a>
                 <a href="#testimonials">Testimonials</a>
                 <a href="#contact">Contact</a>
-                <a href="#contact" class="contact-btn">Get Quote</a>
             </nav>
         </div>
     </header>
